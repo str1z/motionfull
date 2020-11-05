@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>MotionFull Remote</title>
+    <script src="socket.io.js"></script>
+    <style>
+      body {
+        user-select: none;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgb(20, 20, 20);
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      window.onload = () => {
+        const socket = io.connect("/remote");
+
+        document.body.addEventListener("touchmove", (e) => socket.emit("move", { x: e.touches[0].pageX, y: e.touches[0].pageY }));
+        document.body.addEventListener("touchstart", (e) => socket.emit("start", { x: e.touches[0].pageX, y: e.touches[0].pageY }));
+        document.body.addEventListener("touchend", (e) => socket.emit("end"));
+        document.addEventListener("gesturestart", (e) => e.preventDefault());
+      };
+    </script>
+  </body>
+</html>

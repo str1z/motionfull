@@ -1,0 +1,18 @@
+{
+  "name": "motionfull",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "build": "nexe"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "robotjs": "^0.6.0",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nexe": "^3.3.2"
+  }
+}

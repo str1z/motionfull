@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MotionFull Control Panel</title>
+    <script src="socket.io.js"></script>
+    <script src="qrcode.js"></script>
+  </head>
+  <body>
+    <div id="qr-code"></div>
+    <h1>Sentivity</h1>
+    <input id="sentivity" type="number" min="1" max="200" value="100" />
+    <button onclick="socket.emit('settings', {sentivity: document.getElementById('sentivity').value})">Apply settings</button>
+    <script>
+      const socket = io.connect("/control-panel");
+      socket.on("target_local_ip", (data) => {
+        new QRCode(document.getElementById("qr-code"), "http://" + data.ip + ":8080/remote.html");
+      });
+    </script>
+  </body>
+</html>
